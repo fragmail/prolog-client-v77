@@ -222,7 +222,7 @@
 	ЖурналВыполнения(ТекстСообщения);
 	
 	Соединение = СоздатьОбъект("WinHttp.WinHttpRequest.5.1"); 
-	Соединение.Open("POST", сзЗапрос.Получить("Адрес"), -1); 
+	Соединение.Open("POST", сзЗапрос.Получить("Адрес"),  -1); 
 	//Соединение.SetCredentials(сзЗапрос.Получить("ЛогинПрокси"), 
 	//	сзЗапрос.Получить("ПарольПрокси"), 0);
 	Соединение.Send(ТекстСообщения);
@@ -1213,7 +1213,8 @@
 	НС = Карта.GeocodeResultsCount;
 
 	Пока НС > 0 Цикл
-	    
+// тут у нас логическая ошибка, обеспечивающая бесконечный цикл при 
+// количестве пунктов доставки больше 10:	    
 		тзПунктыДоставки.ПолучитьСтрокуПоНомеру(НС);
 		
 		НС = НС - 1;
@@ -2120,8 +2121,10 @@
 //===========================================
 // Prolog
 //===========================================
-стрТекстЗапроса = "<soap:Envelope xmlns:soap=""http://schemas.xmlsoap.org/soap/envelope/""
-|xmlns:m=""http://api.prolog.city/schema/1.0/ws"" xmlns:d5p1=""http://api.prolog.city/schema/1.0/base"">
+стрТекстЗапроса = "<soap:Envelope 
+| xmlns:soap=""http://schemas.xmlsoap.org/soap/envelope/""
+| xmlns:m=""http://api.prolog.city/schema/1.0/ws"" 
+| xmlns:d5p1=""http://api.prolog.city/schema/1.0/base"">
 |	<soap:Body/>
 |</soap:Envelope>
 |";
